@@ -32,4 +32,10 @@ class Api::BooksController < ApplicationController
       render json: { errors: @book.errors.full_messages }
     end
   end
+
+  def destroy
+    @book = Book.find(params[:id])
+    @book.destroy
+    render 'show.json.jb'
+  end
 end

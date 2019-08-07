@@ -20,4 +20,16 @@ class Api::BooksController < ApplicationController
       render json: { errors: @book.errors.full_messages }
     end
   end
+
+  def update
+    @book = Book.find(params[:id])
+    if @book.update(
+      title: params[:title] || @book.title,
+      pages: params[:pages] || @book.pages
+    )
+      render 'show.json.jb'
+    else
+      render json: { errors: @book.errors.full_messages }
+    end
+  end
 end
